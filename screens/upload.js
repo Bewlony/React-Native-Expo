@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Text, View, StyleSheet } from 'react-native';
+import { Button, Text, View, StyleSheet, WebView, Platform } from 'react-native';
 import { Constants, WebBrowser } from 'expo';
+// import AndroidWebView from 'react-native-webview-file-upload-android';
+// import {WebViewAndroid} from 'react-native-webview-android';
 
 export default class upload extends Component {
   state = {
@@ -9,13 +11,17 @@ export default class upload extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Button
-          style={styles.paragraph}
-          title="Open WebBrowser"
-          onPress={this._handlePressButtonAsync}
-        />
-        <Text>{this.state.result && JSON.stringify(this.state.result)}</Text>
+      <View style={{flex:1}}>
+        {Platform.select({
+              android:  () =>  <Button
+                                  title="Open WebBrowser"
+                                  onPress={this._handlePressButtonAsync}
+                                />,
+
+              ios:      () => <WebView
+                                source={{ uri: 'https://mobilehtml5.org/ts/?id=23' }}
+                              />
+        })()}
       </View>
     );
   }
@@ -29,9 +35,6 @@ export default class upload extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
   },
 });
