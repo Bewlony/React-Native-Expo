@@ -75,13 +75,15 @@ class CreateAccount extends Component {
           }
         });
         var info = {
-          name: name,
-          age: age,
+          username: email,
+          firstName: name,
+          lastName: age,
           bloodType: bloodType,
           faculty: faculty,
           major: major,
-          emergenzyCall: emergenzyCall,
+          emerCell: emergenzyCall,
         };
+        Meteor.call('postInsert',info);
         // usersInfo.addUsersInfo(info);
       }
       else{

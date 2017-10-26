@@ -36,7 +36,10 @@ class HelpMe extends Component {
     if(Meteor.userId()){
       this._getLocationAsync();
       alert('Locations has been Sent!!');
-      var point = {lat:this.state.location.coords.latitude, lng: this.state.location.coords.longitude };
+      var point = {
+        userId: Meteor.userId(),
+        lat:this.state.location.coords.latitude,
+        lng: this.state.location.coords.longitude };
       Meteor.call('markInsert',point);
       console.log(this.state.location.coords.longitude);
       console.log(this.state.location.coords.latitude);
