@@ -10,7 +10,7 @@ import Edit from '../screens/Edit';
 import Record from '../screens/Record';
 import CreateAccount from '../screens/CreateAccount';
 import Camera from '../screens/CameraScreen';
-import ImagePicker from '../screens/ImagePicker';
+import Picker from '../screens/Picker';
 import Upload from '../screens/upload';
 
 export const SignInStack = StackNavigator({
@@ -54,9 +54,9 @@ export const HomeStack = StackNavigator({
     },
   },
   ImagePicker:{
-    screen: ImagePicker,
+    screen: Picker,
     navigationOptions:{
-      title: 'ImagePicker',
+      title: 'Picker',
     },
   },
 });

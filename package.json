@@ -14,9 +14,11 @@
   "dependencies": {
     "@expo/samples": "^2.0.2",
     "expo": "^20.0.0",
+    "firebase": "^4.6.0",
     "native-base": "^2.3.1",
     "react": "16.0.0-alpha.12",
     "react-native": "https://github.com/expo/react-native/archive/sdk-20.0.0.tar.gz",
+    "react-native-fetch-blob": "^0.10.8",
     "react-native-maps": "^0.17.1",
     "react-native-meteor": "^1.1.0",
     "react-navigation": "^1.0.0-beta.12"
