@@ -53,12 +53,12 @@ export const HomeStack = StackNavigator({
       title: 'Camera',
     },
   },
-  ImagePicker:{
-    screen: Picker,
-    navigationOptions:{
-      title: 'Picker',
-    },
-  },
+  // ImagePicker:{
+  //   screen: Picker,
+  //   navigationOptions:{
+  //     title: 'Picker',
+  //   },
+  // },
 });
 
 export const LocationsStack = StackNavigator({

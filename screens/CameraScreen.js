@@ -1,6 +1,6 @@
-import { Camera, Video, FileSystem, Permissions, } from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Slider, Image, Picker, Button, ScrollView, Vibration, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Slider, Image, Picker, Button, ScrollView, Vibration, CameraRoll } from 'react-native';
+import { Camera, Video, FileSystem, Permissions, constants, takeSnapshotAsync, takePictureAsync } from 'expo';
 import GalleryScreen from '../screens/GalleryScreen';
 
 const flashModeOrder = {
@@ -32,15 +32,16 @@ class CameraScreen extends React.Component {
     photoId: 1,
     showGallery: false,
     photos: [],
+    cameraRollUri: null,
   };
 
-  componentDidMount() {
-    FileSystem.makeDirectoryAsync(
-      FileSystem.documentDirectory + 'photos'
-    ).catch(e => {
-      console.log(e, 'Directory exists');
-    });
-  }
+  // componentDidMount() {
+  //   FileSystem.makeDirectoryAsync(
+  //     FileSystem.documentDirectory + 'photos'
+  //   ).catch(e => {
+  //     console.log(e, 'Directory exists');
+  //   });
+  // }
 
   getRatios = async function() {
     const ratios = await this.camera.getSupportedRatios();
@@ -101,21 +102,28 @@ class CameraScreen extends React.Component {
     });
   }
 
-  takePicture = async function() {
-    if (this.camera) {
-      this.camera.takePicture().then(data => {
-        FileSystem.moveAsync({
-          from: data,
-          to: `${FileSystem.documentDirectory}photos/Photo_${this.state
-            .photoId}.jpg`,
-        }).then(() => {
-          this.setState({
-            photoId: this.state.photoId + 1,
-          });
-          Vibration.vibrate();
-        });
-      });
-    }
+  // takePicture = async function() {
+  //   if (this.camera) {
+  //     this.camera.takePicture().then(data => {
+  //       FileSystem.moveAsync({
+  //         from: data,
+  //         to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
+  //       }).then(() => {
+  //         this.setState({
+  //           photoId: this.state.photoId + 1,
+  //         });
+  //         this._saveToCameraRollAsync();
+  //         Vibration.vibrate();
+  //       });
+  //     });
+  //   }
+  // };
+
+  _saveToCameraRollAsync = async () => {
+    let result = await this.camera.takePictureAsync();
+    let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
+    this.setState({ cameraRollUri: saveResult });
+    console.log(this.state.cameraRollUri);
   };
 
   renderGallery() {
@@ -209,7 +217,7 @@ class CameraScreen extends React.Component {
               styles.picButton,
               { flex: 0.3, alignSelf: 'flex-end' },
             ]}
-            onPress={this.takePicture.bind(this)}>
+            onPress={this._saveToCameraRollAsync.bind(this)}>
             <Text style={styles.flipText}> SNAP </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -230,6 +238,7 @@ class CameraScreen extends React.Component {
     return (
       <View style={styles.container}>
         {this.state.showGallery ? this.renderGallery() : this.renderCamera()}
+
       </View>
     );
   }
