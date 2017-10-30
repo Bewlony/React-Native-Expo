@@ -14,6 +14,7 @@ class CreateAccount extends Component {
        this.state = {
          email: '',
          password: '',
+         userId:'',
          name: '',
          age: '',
          bloodType: '',
@@ -56,13 +57,13 @@ class CreateAccount extends Component {
 
     onCreateAccount = () =>{
       const { email, password, name, age, bloodType, faculty, major, emergenzyCall } = this.state;
-      console.log(email);
-      console.log(name);
-      console.log(age);
-      console.log(bloodType);
-      console.log(faculty);
-      console.log(major);
-      console.log(emergenzyCall);
+      // console.log(email);
+      // console.log(name);
+      // console.log(age);
+      // console.log(bloodType);
+      // console.log(faculty);
+      // console.log(major);
+      // console.log(emergenzyCall);
 
       if (this.isValid()) {
         Accounts.createUser({ email, password }, (error) => {
@@ -71,19 +72,32 @@ class CreateAccount extends Component {
           } else {
             alert('Create Success');
             // this.onSignIn(); // temp hack that you might need to use
-            this.props.navigation.navigate('Account');
           }
         });
-        var info = {
-          username: email,
-          firstName: name,
-          lastName: age,
-          bloodType: bloodType,
-          faculty: faculty,
-          major: major,
-          emerCell: emergenzyCall,
-        };
-        Meteor.call('postInsert',info);
+
+        Meteor.loginWithPassword(email, password, (error) => {
+          if (error) {
+            this.setState({ error: error.reason });
+            alert('Invalid User');
+          }
+          else{
+            alert('Login Success!!');
+            var info = {
+              userId: Meteor.userId(),
+              userName: email,
+              firstName: name,
+              lastName: age,
+              bloodType: bloodType,
+              faculty: faculty,
+              major: major,
+              emerCell: emergenzyCall,
+            };
+            console.log(info);
+            Meteor.call('postInsert',info);
+          }
+        });
+
+        this.props.navigation.navigate('User');
         // usersInfo.addUsersInfo(info);
       }
       else{
@@ -129,7 +143,7 @@ class CreateAccount extends Component {
              </Item>
 
              <Item rounded>
-              <Label> Age : </Label>
+              <Label> lastName : </Label>
               <Input
                 autoCorrect={false}
                 onChangeText={(age)=>this.setState({age})}

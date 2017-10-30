@@ -19,16 +19,19 @@ export default class upload extends Component {
                                   onPress={this._handlePressButtonAsync}
                                 />,
 
-              ios:      () => <WebView
-                                source={{ uri: 'https://emergenza.herokuapp.com/upload/'+ Meteor.userId }}
-                              />
+              ios:      () => <Button
+                                  title="Open WebBrowser"
+                                  onPress={this._handlePressButtonAsync}
+                                />,
+
         })()}
       </View>
     );
   }
 
   _handlePressButtonAsync = async () => {
-    let result = await WebBrowser.openBrowserAsync('https://emergenza.herokuapp.com/upload/'+ Meteor.userId );
+    console.log('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+    let result = await WebBrowser.openBrowserAsync('https://emergenza.herokuapp.com/upload/'+ Meteor.userId() );
     this.setState({ result });
   };
 }
