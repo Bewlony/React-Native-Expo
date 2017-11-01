@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Text, View, StyleSheet, WebView, Platform } from 'react-native';
+import { Button, Text, View, StyleSheet, WebView, Platform ,Linking} from 'react-native';
 import { Constants, WebBrowser } from 'expo';
 import Meteor from 'react-native-meteor';
 // import AndroidWebView from 'react-native-webview-file-upload-android';
@@ -20,13 +20,16 @@ export default class upload extends Component {
                                 />,
 
               ios:      () => <Button
-                                  title="Open WebBrowser"
-                                  onPress={this._handlePressButtonAsync}
-                                />,
-
+                                title="Open WebBrowser"
+                                onPress={this._handleLinking}
+                              />,
         })()}
       </View>
     );
+  }
+
+  _handleLinking = async () => {
+    Linking.openURL('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
   }
 
   _handlePressButtonAsync = async () => {

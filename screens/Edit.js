@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image} from 'react-native';
+import {Image ,View} from 'react-native';
 import {
   Container,
   Header,
@@ -13,11 +13,15 @@ import {
   Left,
   Body
 } from 'native-base';
-import Meteor from 'react-native-meteor';
+import Meteor, { connectMeteor, createContainer }  from 'react-native-meteor';
 
 class Edit extends Component {
 
   render() {
+    var obj = Object.assign({},this.props.posts[0])
+    console.log(obj.userId);
+    // console.log(data.userId);
+
     return (
       <Container>
         <Content>
@@ -26,17 +30,21 @@ class Edit extends Component {
               <Left>
                 <Thumbnail source={{uri: 'https://www.publicationsports.com/vProd/asset/image/component/ps/ps_single_login/user_logo.png'}}/>
                 <Body>
-                  <Text>Emergenza!!!</Text>
-                  <Text note>April 15, 2016</Text>
+                  <Text>{obj.userName}</Text>
+                  
                 </Body>
               </Left>
             </CardItem>
             <CardItem>
               <Body>
-                <Text>NAME : Mr.Emergenza</Text>
-                <Text>AGE : 1 month</Text>
-                <Text>FACULTY : ComputerEngineering</Text>
-                <Text>BLOOD TYPE : ABABO+</Text>
+                <Text>UseID : {obj.userId}</Text>
+                <Text>StudentId : {obj.stuId}</Text>
+                <Text>FirstName : {obj.firstName}</Text>
+                <Text>LastName : {obj.lastName}</Text>
+                <Text>BLOOD TYPE : {obj.bloodType}</Text>
+                <Text>FACULTY : {obj.faculty}</Text>
+                <Text>Major: {obj.major}</Text>
+                <Text>EmergenzyCell: {obj.emerCell}</Text>
               </Body>
             </CardItem>
           </Card>
@@ -45,4 +53,11 @@ class Edit extends Component {
     );
   }
 }
-export default Edit;
+export default createContainer(params=>{
+  Meteor.subscribe('posts');
+  return {
+    posts: Meteor.collection('posts').find({userId: Meteor.userId()}),
+  };
+}, Edit)
+
+// export default Edit;

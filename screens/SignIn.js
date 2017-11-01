@@ -37,7 +37,7 @@ class SignIn extends Component {
 
     onSignIn = () =>{
       const { email, password } = this.state;
-
+      this._checklogin();
       if (this.isValid()) {
         Meteor.loginWithPassword(email, password, (error) => {
           if (error) {
@@ -52,17 +52,23 @@ class SignIn extends Component {
           }
         });
       }
-      console.log(Meteor.userId());
+      // console.log(Meteor.userId());
     }
 
     onCreateAccount = () =>{
       this.props.navigation.navigate('CreateAccount');
     }
 
+    _checklogin() {
+      if(Meteor.userId()){
+        this.props.navigation.navigate('User');
+      }else{
+        alert('Please Create Account');
+      }
+    }
   render() {
     return (
       <View style={{flex: 1}}>
-
           <View style={styles.inputStyle}>
 
             <Form>

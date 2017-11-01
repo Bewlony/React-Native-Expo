@@ -38,26 +38,44 @@ class HelpMe extends Component {
       alert('Locations has been Sent!!');
       var point = {
         userId: Meteor.userId(),
-        lat:this.state.location.coords.latitude,
+        lat: this.state.location.coords.latitude,
         lng: this.state.location.coords.longitude };
       Meteor.call('markInsert',point);
       console.log(this.state.location.coords.longitude);
       console.log(this.state.location.coords.latitude);
+      this.props.navigation.navigate('Upload');
     }
     else{
       alert('please login');
+      this.props.navigation.navigate('Account');
     }
   }
 
   onRecord = () =>{
-    this.props.navigation.navigate('Record');
+    if(Meteor.userId()){
+      this.props.navigation.navigate('Record');
+    }else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+    }
   }
   onCamera = () =>{
-    this.props.navigation.navigate('Camera');
+    if(Meteor.userId()){
+      this.props.navigation.navigate('Camera');
+    }else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+    }
   }
   onImage = () =>{
-    this.props.navigation.navigate('ImagePicker');
+    if(Meteor.userId()){
+      this.props.navigation.navigate('ImagePicker');
+    }else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+    }
   }
+
   render() {
     return (
       <View style={{flex: 1}}>

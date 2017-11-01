@@ -37,8 +37,8 @@ class Locations extends Component {
       text = this.state.errorMessage;
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location.coords);
-      console.log(this.state.location.coords.longitude);
-      console.log(this.state.location.coords.latitude);
+      // console.log(this.state.location.coords.longitude);
+      // console.log(this.state.location.coords.latitude);
 
     }
     return (
