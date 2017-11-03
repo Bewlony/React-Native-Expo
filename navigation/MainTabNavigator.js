@@ -53,12 +53,12 @@ export const HomeStack = StackNavigator({
       title: 'Camera',
     },
   },
-  // ImagePicker:{
-  //   screen: Picker,
-  //   navigationOptions:{
-  //     title: 'Picker',
-  //   },
-  // },
+  ImagePicker:{
+    screen: Picker,
+    navigationOptions:{
+      title: 'ImagePicker',
+    },
+  },
 });
 
 export const LocationsStack = StackNavigator({
@@ -133,7 +133,7 @@ export default TabNavigator(
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    animationEnabled: false,
-    swipeEnabled: false,
+    animationEnabled: true,
+    swipeEnabled: true,
   }
 );

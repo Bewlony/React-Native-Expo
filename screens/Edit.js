@@ -25,13 +25,13 @@ class Edit extends Component {
     return (
       <Container>
         <Content>
-          <Card style={{flex: 1}}>
+          <Card style={{flex: 1,backgroundColor: '#ffebe6',}}>
             <CardItem>
               <Left>
-                <Thumbnail source={{uri: 'https://www.publicationsports.com/vProd/asset/image/component/ps/ps_single_login/user_logo.png'}}/>
+                <Thumbnail source={{uri: 'https://reg1.src.ku.ac.th/picnisit/5830300176.jpg'}}/>
                 <Body>
                   <Text>{obj.userName}</Text>
-                  
+
                 </Body>
               </Left>
             </CardItem>

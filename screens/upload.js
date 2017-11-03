@@ -12,7 +12,7 @@ export default class upload extends Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={ styles.container }>
         {Platform.select({
               android:  () =>  <Button
                                   title="Open WebBrowser"
@@ -29,19 +29,30 @@ export default class upload extends Component {
   }
 
   _handleLinking = async () => {
-    Linking.openURL('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+    if(Meteor.userId()){
+      Linking.openURL('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+    }else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+    }
   }
 
   _handlePressButtonAsync = async () => {
-    console.log('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
-    let result = await WebBrowser.openBrowserAsync('https://emergenza.herokuapp.com/upload/'+ Meteor.userId() );
-    this.setState({ result });
+    if(Meteor.userId()){
+      console.log('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+      let result = await WebBrowser.openBrowserAsync('https://emergenza.herokuapp.com/upload/'+ Meteor.userId() );
+      this.setState({ result });
+    }else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+    }
+
   };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#ffebe6',
   },
 });

@@ -68,7 +68,7 @@ class SignIn extends Component {
     }
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1,backgroundColor: '#ffebe6',}}>
           <View style={styles.inputStyle}>
 
             <Form>
@@ -109,6 +109,7 @@ class SignIn extends Component {
                 primary
                 block
                 onPress={this.onCreateAccount}
+                style={{marginTop: 2}}
               >
                 <Text style={{color: 'white'}}>Create Account</Text>
 

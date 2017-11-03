@@ -1,41 +1,35 @@
 import React from 'react';
-import { Image, StyleSheet, View, TouchableOpacity, Text, ScrollView, } from 'react-native';
-import { FileSystem } from 'expo';
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
+import {DocumentPicker, ImagePicker} from 'expo';
+import Meteor from 'react-native-meteor';
 
 export default class GalleryScreen extends React.Component {
-  state = {
-    photos: [],
+    state = {
+      image: null,
+    };
+
+   _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+    });
   };
 
-  componentDidMount() {
-    FileSystem.readDirectoryAsync(
-      FileSystem.documentDirectory + 'photos'
-    ).then(photos => {
-      this.setState({ photos, });
-    });
-  }
-
   render() {
+         let { image } = this.state;
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={this.props.onPress}>
-          <Text>Back</Text>
-        </TouchableOpacity>
-        <ScrollView contentComponentStyle={{ flex: 1 }}>
-          <View style={styles.pictures}>
-            {this.state.photos.map(photoUri =>
-              <Image
-                style={styles.picture}
-                source={{
-                  uri: `${FileSystem.documentDirectory}photos/${photoUri}`,
-                }}
-                key={photoUri}
-              />
-            )}
-          </View>
-        </ScrollView>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={this.props.onPress}>
+        <Text>Back</Text>
+      </TouchableOpacity>
+      <View style={{ 'marginTop': 20}}>
+        <Button
+          title="View Image"
+          onPress={this._pickImage}
+        />
+
+      </View>
       </View>
     );
   }
@@ -44,18 +38,9 @@ export default class GalleryScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-  },
-  pictures: {
-    flex: 1,
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-  },
-  picture: {
-    width: 100,
-    height: 100,
-    margin: 5,
-    resizeMode: 'contain',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   backButton: {
     padding: 20,

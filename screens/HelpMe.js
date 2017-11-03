@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import {Platform, Text, View, TextInput, StyleSheet} from 'react-native';
-import {Form, Item, Label, Input, Button, Header, Body, Title,Fab,Icon} from 'native-base';
+import { Platform, Text, View, TextInput, StyleSheet} from 'react-native';
+import { Form, Item, Label, Input, Button, Header, Body, Title,Fab,Icon} from 'native-base';
 import { Constants, Location, Permissions, MapView } from 'expo';
+import Animation from 'lottie-react-native';
 import Meteor from 'react-native-meteor';
-
+import anim from '../assets/animation/favourite_app_icon.json';
 class HelpMe extends Component {
   state = {
     location: null,
     errorMessage: null,
   };
+
+  componentDidMount(){
+    this.animation.play();
+  }
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -79,6 +84,15 @@ class HelpMe extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
+      <Animation
+          ref={animation => { this.animation = animation; }}
+          style={{
+            width: 80,
+            height: 80
+          }}
+          loop={true}
+          source={anim}
+        />
           <View style={styles.inputStyle}>
             <View>
               <Button
@@ -124,6 +138,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffebe6'
   },
   circle: {
     borderWidth:1,
@@ -135,5 +150,4 @@ const styles = {
     borderRadius:200,
   },
 }
-
 export default HelpMe;
