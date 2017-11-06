@@ -90,6 +90,7 @@ export default TabNavigator(
     },
     Locations: {
       screen: LocationsStack,
+      swipeEnabled: false,
     },
     Upload: {
       screen: Upload,
@@ -133,7 +134,7 @@ export default TabNavigator(
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    animationEnabled: true,
+    animationEnabled: false,
     swipeEnabled: true,
   }
 );

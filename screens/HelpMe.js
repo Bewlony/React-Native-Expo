@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, TextInput, StyleSheet} from 'react-native';
+import { Platform, Text, View, TextInput, StyleSheet, Animated, Easing, Image, NativeModules, LayoutAnimation, Vibration, Linking, Alert } from 'react-native';
 import { Form, Item, Label, Input, Button, Header, Body, Title,Fab,Icon} from 'native-base';
-import { Constants, Location, Permissions, MapView } from 'expo';
-import Animation from 'lottie-react-native';
+import { Constants, Location, Permissions, MapView, WebBrowser } from 'expo';
 import Meteor from 'react-native-meteor';
-import anim from '../assets/animation/favourite_app_icon.json';
+
+const { UIManager } = NativeModules;
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+
 class HelpMe extends Component {
   state = {
     location: null,
     errorMessage: null,
+    result: null,
+    fadeAnim: new Animated.Value(0),
   };
 
   componentDidMount(){
-    this.animation.play();
+    Animated.timing(
+     this.state.fadeAnim,
+     {
+       toValue: 1,
+       duration: 2000,
+     }
+   ).start();
   }
 
   componentWillMount() {
@@ -37,24 +47,53 @@ class HelpMe extends Component {
     this.setState({ location });
   };
 
+  _handleLinking = async () => {
+    if(Meteor.userId()){
+      Linking.openURL('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+    }
+  }
+
+  _handlePressButtonAsync = async () => {
+    if(Meteor.userId()){
+      console.log('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+      let result = await WebBrowser.openBrowserAsync('https://emergenza.herokuapp.com/upload/'+ Meteor.userId() );
+      this.setState({ result });
+    }
+  };
+
   PressHere = () =>{
     if(Meteor.userId()){
       this._getLocationAsync();
-      alert('Locations has been Sent!!');
+      // alert('Locations has been Sent!!');
       var point = {
         userId: Meteor.userId(),
         lat: this.state.location.coords.latitude,
         lng: this.state.location.coords.longitude };
       Meteor.call('markInsert',point);
-      console.log(this.state.location.coords.longitude);
-      console.log(this.state.location.coords.latitude);
-      this.props.navigation.navigate('Upload');
+      // console.log(this.state.location.coords.longitude);
+      // console.log(this.state.location.coords.latitude);
+      Vibration.vibrate();
+      // this.props.navigation.navigate('Upload');
+      Alert.alert(
+        'UPLOAD FILES ?',
+        '',
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () =>  {Platform.select({
+                                          android:  () =>  this._handlePressButtonAsync(),
+                                          ios:      () => this._handleLinking(),
+                                        })()}
+          },
+        ],
+        { cancelable: false }
+      )
     }
     else{
       alert('please login');
       this.props.navigation.navigate('Account');
     }
   }
+
 
   onRecord = () =>{
     if(Meteor.userId()){
@@ -81,25 +120,18 @@ class HelpMe extends Component {
     }
   }
 
+
   render() {
     return (
-      <View style={{flex: 1}}>
-      <Animation
-          ref={animation => { this.animation = animation; }}
-          style={{
-            width: 80,
-            height: 80
-          }}
-          loop={true}
-          source={anim}
-        />
+      <Animated.View style={{flex: 1, opacity: this.state.fadeAnim,}}>
           <View style={styles.inputStyle}>
             <View>
               <Button
                 style={styles.circle}
-                onPress={this.PressHere}
+                deleyLongPress = {2000}
+                onLongPress={this.PressHere}
               >
-                <Text style={{fontSize:30, color:'white'}}>Press here</Text>
+                <Text style={{fontSize:30, color:'white'}}>Hold</Text>
               </Button>
             </View>
           </View>
@@ -127,7 +159,7 @@ class HelpMe extends Component {
               <Icon name="image" />
             </Button>
           </Fab>
-      </View>
+      </Animated.View>
     );
   }
 }

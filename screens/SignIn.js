@@ -46,7 +46,6 @@ class SignIn extends Component {
 
           }
           else{
-            alert('Login Success!!');
             console.log(email);
             this.props.navigation.navigate('User');
           }

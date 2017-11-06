@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Slider, Image, Picker, Button, ScrollView, Vibration, CameraRoll } from 'react-native';
-import { Camera, Video, FileSystem, Permissions, constants, takeSnapshotAsync, takePictureAsync } from 'expo';
-import GalleryScreen from '../screens/GalleryScreen';
+import { Camera, Video, FileSystem, Permissions, constants, takeSnapshotAsync, takePictureAsync, ocumentPicker, ImagePicker } from 'expo';
+
 
 const flashModeOrder = {
   off: 'on',
@@ -48,9 +48,9 @@ class CameraScreen extends React.Component {
     return ratios;
   };
 
-  toggleView() {
-    this.setState({
-      showGallery: !this.state.showGallery,
+  toggleView = async () =>{
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
     });
   }
 
@@ -124,6 +124,7 @@ class CameraScreen extends React.Component {
     let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
     this.setState({ cameraRollUri: saveResult });
     console.log(this.state.cameraRollUri);
+    Vibration.vibrate();
   };
 
   renderGallery() {

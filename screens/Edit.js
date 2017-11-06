@@ -18,17 +18,17 @@ import Meteor, { connectMeteor, createContainer }  from 'react-native-meteor';
 class Edit extends Component {
 
   render() {
-    var obj = Object.assign({},this.props.posts[0])
+    var obj = Object.assign({},this.props.posts[0]);
     console.log(obj.userId);
     // console.log(data.userId);
-
+    var uri = 'https://reg1.src.ku.ac.th/picnisit/'+obj.stuId+'.jpg';
     return (
       <Container>
         <Content>
           <Card style={{flex: 1,backgroundColor: '#ffebe6',}}>
             <CardItem>
               <Left>
-                <Thumbnail source={{uri: 'https://reg1.src.ku.ac.th/picnisit/5830300176.jpg'}}/>
+                <Thumbnail source={{uri: uri}}/>
                 <Body>
                   <Text>{obj.userName}</Text>
 
@@ -37,7 +37,6 @@ class Edit extends Component {
             </CardItem>
             <CardItem>
               <Body>
-                <Text>UseID : {obj.userId}</Text>
                 <Text>StudentId : {obj.stuId}</Text>
                 <Text>FirstName : {obj.firstName}</Text>
                 <Text>LastName : {obj.lastName}</Text>
