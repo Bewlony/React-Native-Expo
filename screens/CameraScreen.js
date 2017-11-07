@@ -35,14 +35,6 @@ class CameraScreen extends React.Component {
     cameraRollUri: null,
   };
 
-  // componentDidMount() {
-  //   FileSystem.makeDirectoryAsync(
-  //     FileSystem.documentDirectory + 'photos'
-  //   ).catch(e => {
-  //     console.log(e, 'Directory exists');
-  //   });
-  // }
-
   getRatios = async function() {
     const ratios = await this.camera.getSupportedRatios();
     return ratios;
@@ -101,24 +93,6 @@ class CameraScreen extends React.Component {
       depth,
     });
   }
-
-  // takePicture = async function() {
-  //   if (this.camera) {
-  //     this.camera.takePicture().then(data => {
-  //       FileSystem.moveAsync({
-  //         from: data,
-  //         to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
-  //       }).then(() => {
-  //         this.setState({
-  //           photoId: this.state.photoId + 1,
-  //         });
-  //         this._saveToCameraRollAsync();
-  //         Vibration.vibrate();
-  //       });
-  //     });
-  //   }
-  // };
-
   _saveToCameraRollAsync = async () => {
     let result = await this.camera.takePictureAsync();
     let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');

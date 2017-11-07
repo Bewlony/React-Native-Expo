@@ -84,13 +84,6 @@ class CreateAccount extends Component {
 
     onCreateAccount = () =>{
       const { email, password, conPass, stuId, name, last, bloodType, faculty, major, emergenzyCall  } = this.state;
-      // console.log(email);
-      // console.log(name);
-      // console.log(last);
-      // console.log(bloodType);
-      // console.log(faculty);
-      // console.log(major);
-      // console.log(emergenzyCall);
 
       if (this.isValid()) {
         Accounts.createUser({ email, password }, (error) => {
@@ -98,7 +91,6 @@ class CreateAccount extends Component {
             this.setState({ error: error.reason });
           } else {
             alert('Create Success');
-            // this.onSignIn(); // temp hack that you might need to use
           }
         });
 

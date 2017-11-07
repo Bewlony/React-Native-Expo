@@ -23,9 +23,9 @@ class Edit extends Component {
     // console.log(data.userId);
     var uri = 'https://reg1.src.ku.ac.th/picnisit/'+obj.stuId+'.jpg';
     return (
-      <Container>
+      <Container style={{flex: 1,backgroundColor: '#ffebe6',}}>
         <Content>
-          <Card style={{flex: 1,backgroundColor: '#ffebe6',}}>
+          <Card>
             <CardItem>
               <Left>
                 <Thumbnail source={{uri: uri}}/>

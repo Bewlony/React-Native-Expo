@@ -5,8 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
 import Meteor from 'react-native-meteor';
 
-const SERVER_URL = 'ws://158.108.174.189:3000/websocket';
-// const SERVER_URL = 'https://emergenza.herokuapp.com/websocket';
+// const SERVER_URL = 'ws://10.64.67.227:3000/websocket';
+const SERVER_URL = 'https://emergenza.herokuapp.com/websocket';
 // 192.168.1.217
 // 158.108.174.246
 

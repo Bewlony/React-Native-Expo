@@ -4,9 +4,6 @@ import { Form, Item, Label, Input, Button, Header, Body, Title,Fab,Icon} from 'n
 import { Constants, Location, Permissions, MapView, WebBrowser } from 'expo';
 import Meteor from 'react-native-meteor';
 
-const { UIManager } = NativeModules;
-UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-
 class HelpMe extends Component {
   state = {
     location: null,

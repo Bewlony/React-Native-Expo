@@ -12,6 +12,7 @@ import CreateAccount from '../screens/CreateAccount';
 import Camera from '../screens/CameraScreen';
 import Picker from '../screens/Picker';
 import Upload from '../screens/upload';
+import Nearbys from '../screens/Nearby';
 
 export const SignInStack = StackNavigator({
   Account: {
@@ -68,7 +69,12 @@ export const LocationsStack = StackNavigator({
       title: 'Locations',
     },
   },
-
+  Nearbys: {
+    screen: Nearbys,
+    navigationOptions: {
+      title: 'Nearbys',
+    },
+  },
 });
 
 export const UploadStack = StackNavigator({

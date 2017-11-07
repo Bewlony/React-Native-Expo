@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, Dimensions, Image ,TextInput} from 'react-native';
+import {Text, View, Dimensions, Image ,TextInput, Vibration} from 'react-native';
 import {Form, Item, Label, Input, Button, Header, Body, Title} from 'native-base';
 import Meteor, {createContrainer,Accounts} from 'react-native-meteor';
 // var myBg = require('../assets/icons/bg.jpg');
@@ -61,8 +61,6 @@ class SignIn extends Component {
     _checklogin() {
       if(Meteor.userId()){
         this.props.navigation.navigate('User');
-      }else{
-        alert('Please Create Account');
       }
     }
   render() {
