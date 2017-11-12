@@ -13,8 +13,6 @@ class HelpMe extends Component {
     result: null,
   };
 
-  componentDidMount(){
-  }
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {

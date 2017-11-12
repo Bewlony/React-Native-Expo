@@ -10,7 +10,6 @@ import Edit from '../screens/Edit';
 import Record from '../screens/Record';
 import CreateAccount from '../screens/CreateAccount';
 import Camera from '../screens/CameraScreen';
-import Picker from '../screens/Picker';
 import Upload from '../screens/upload';
 import Nearbys from '../screens/Nearby';
 
@@ -52,12 +51,6 @@ export const HomeStack = StackNavigator({
     screen: Camera,
     navigationOptions:{
       title: 'Camera',
-    },
-  },
-  ImagePicker:{
-    screen: Picker,
-    navigationOptions:{
-      title: 'ImagePicker',
     },
   },
 });
