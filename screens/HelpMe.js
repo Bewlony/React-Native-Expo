@@ -3,23 +3,17 @@ import { Platform, Text, View, TextInput, StyleSheet, Animated, Easing, Image, N
 import { Form, Item, Label, Input, Button, Header, Body, Title,Fab,Icon} from 'native-base';
 import { Constants, Location, Permissions, MapView, WebBrowser } from 'expo';
 import Meteor from 'react-native-meteor';
+import * as Animatable from 'react-native-animatable';
+
 
 class HelpMe extends Component {
   state = {
     location: null,
     errorMessage: null,
     result: null,
-    fadeAnim: new Animated.Value(0),
   };
 
   componentDidMount(){
-    Animated.timing(
-     this.state.fadeAnim,
-     {
-       toValue: 1,
-       duration: 2000,
-     }
-   ).start();
   }
 
   componentWillMount() {
@@ -122,15 +116,16 @@ class HelpMe extends Component {
     return (
       <Animated.View style={{flex: 1, opacity: this.state.fadeAnim,}}>
           <View style={styles.inputStyle}>
-            <View>
+            <Animatable.View ref = "Bt1">
               <Button
                 style={styles.circle}
                 deleyLongPress = {2000}
-                onLongPress={this.PressHere}
+                onLongPress={() =>{this.refs.Bt1.flipInX(500);var _this = this;setTimeout(function() { _this.PressHere(); }, 500);
+;}}
               >
                 <Text style={{fontSize:30, color:'white'}}>Hold</Text>
               </Button>
-            </View>
+            </Animatable.View>
           </View>
           <Fab
             active={this.state.active}

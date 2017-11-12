@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {Text, View, Dimensions, Image ,TextInput, Vibration} from 'react-native';
+import {Text, View, Dimensions, Image ,TextInput, Vibration, TouchableOpacity,TouchableWithoutFeedback} from 'react-native';
 import {Form, Item, Label, Input, Button, Header, Body, Title} from 'native-base';
 import Meteor, {createContrainer,Accounts} from 'react-native-meteor';
+import * as Animatable from 'react-native-animatable';
+
 // var myBg = require('../assets/icons/bg.jpg');
 var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
@@ -14,9 +16,9 @@ class SignIn extends Component {
          email: '',
          password: '',
          error: null,
+
        };
    }
-
 
    isValid() {
       const { email, password } = this.state;
@@ -51,7 +53,7 @@ class SignIn extends Component {
           }
         });
       }
-      // console.log(Meteor.userId());
+      console.log(Meteor.userId());
     }
 
     onCreateAccount = () =>{
@@ -62,7 +64,11 @@ class SignIn extends Component {
       if(Meteor.userId()){
         this.props.navigation.navigate('User');
       }
+      else{
+        alert('Please Fill Email and Password');
+      }
     }
+
   render() {
     return (
       <View style={{flex: 1,backgroundColor: '#ffebe6',}}>
@@ -92,28 +98,44 @@ class SignIn extends Component {
 
             </Form>
 
-            <View style={{marginTop: 10}}>
-              <Button
+            <Animatable.View style={{marginTop: 10}}
+              ref = "text1"
+            >
+              {/* <Button
                 primary
                 block
                 onPress={this.onSignIn}
               >
                 <Text style={{color: 'white'}}>Sign In</Text>
 
-              </Button>
+              </Button> */}
+              <Button
+                primary
+                block 
+                onPress={() => {this.refs.text1.shake(300);var _this = this;setTimeout(function() { _this.onSignIn(); }, 1000);
+;}}
+                style={{marginTop: 2}}
+              >
+                <Animatable.Text ref = "text1" style={{color: 'white'}}>Signin</Animatable.Text>
 
+              </Button>           
+              </Animatable.View>
+              <Animatable.View style={{marginTop: 10}}
+                ref = "text"
+              >
               <Button
                 primary
                 block
-                onPress={this.onCreateAccount}
+                onPress={() => {this.refs.text.tada(300);var _this = this;setTimeout(function() { _this.onCreateAccount(); }, 1000);
+;}}
                 style={{marginTop: 2}}
               >
-                <Text style={{color: 'white'}}>Create Account</Text>
+                <Animatable.Text ref = "text" style={{color: 'white'}}>Create Account</Animatable.Text>
 
               </Button>
+              </Animatable.View>
             </View>
           </View>
-      </View>
     );
   }
 }
@@ -130,7 +152,28 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     margin: 20
-  }
+  },
+  toggle: {
+    width: 270,
+    height: 50,
+    backgroundColor: '#333',
+    borderRadius: 3,
+    padding: 5,
+    fontSize: 14,
+    alignSelf: 'center',
+    textAlign: 'center',
+    margin: 10,
+    color: 'rgba(255, 255, 255, 1)',
+  },
+  toggledOn: {
+    color: 'rgba(255, 33, 33, 1)',
+    fontSize: 16,
+    transform: [{
+      rotate: '8deg',
+    }, {
+      translateY: -20,
+    }],
+  },
 }
 
 export default SignIn;

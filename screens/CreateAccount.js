@@ -4,8 +4,6 @@ import {Form, Item, Label, Input, Button, Header, Body, Title} from 'native-base
 import Meteor, {createContrainer,Accounts} from 'react-native-meteor';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 // var myBg = require('../assets/icons/bg.jpg');
-var height = Dimensions.get('window').height;
-var width = Dimensions.get('window').width;
 
 class CreateAccount extends Component {
   constructor(props) {
@@ -256,12 +254,6 @@ class CreateAccount extends Component {
 }
 
 const styles = {
-  bgImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    width: width,
-    height: height
-  },
   inputStyle: {
     flex: 1,
     flexDirection: 'column',
