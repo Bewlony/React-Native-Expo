@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Text, View, StyleSheet, WebView, Platform ,Linking, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import { Button, Text, View, StyleSheet, WebView, Platform ,Linking, TouchableOpacity, TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import { Constants, WebBrowser } from 'expo';
 import Meteor from 'react-native-meteor';
 // import AndroidWebView from 'react-native-webview-file-upload-android';
@@ -17,7 +17,7 @@ export default class upload extends Component {
     return (
       <View style={ styles.container }>
         {Platform.select({
-              android:  () =>  <TouchableOpacity onPress={() => {this.setState({ toggledOn: !toggledOn });var _this = this; setTimeout(function() { _this._handlePressButtonAsync(); }, 1000);
+              android:  () =>  <TouchableNativeFeedback onPress={() => {this.setState({ toggledOn: !toggledOn });var _this = this; setTimeout(function() { _this._handlePressButtonAsync(); }, 1000);
                                 ;}}>
                                   <Text
                                     style={[styles.toggle, toggledOn && styles.toggledOn]}
@@ -25,7 +25,7 @@ export default class upload extends Component {
                                   >
                                     Upload!!
                                   </Text>
-                              </TouchableOpacity>, 
+                              </TouchableNativeFeedback>, 
 
               ios:      () =>   <TouchableOpacity onPress={() => {this.setState({ toggledOn: !toggledOn });var _this = this; setTimeout(function() { _this._handleLinking(); }, 1000);
                                 ;}}>
@@ -74,9 +74,8 @@ const styles = StyleSheet.create({
   toggle: {
     marginRight:40,
     marginLeft:40,
-    marginTop:10,
-    paddingTop:20,
-    paddingBottom:20,
+    paddingTop:15,
+    paddingBottom:10,
     width: 270,
     height: 50,
     backgroundColor: '#333',
@@ -88,6 +87,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: 'rgba(255, 255, 255, 1)',
+    // marginRight:40,
+    // marginLeft:40,
+    // paddingTop:15,
+    // paddingBottom:10,
+    // width: 270,
+    // height: 50,
+    // backgroundColor: '#333',
+    // borderRadius: 10,
+    // borderWidth: 5,
+    // padding: 3,
+    // fontSize: 14,
+    // alignSelf: 'center',
+    // textAlign: 'center',
+    // color: 'rgba(255, 255, 255, 1)',
   },
   toggledOn: {
     color: 'rgba(255, 33, 33, 1)',
