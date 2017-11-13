@@ -143,11 +143,6 @@ class HelpMe extends Component {
             >
               <Icon name="camera" />
             </Button>
-            <Button style={{ backgroundColor: '#34A34F' }}
-              onPress={this.onImage}
-            >
-              <Icon name="image" />
-            </Button>
           </Fab>
       </Animated.View>
     );
