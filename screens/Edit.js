@@ -30,20 +30,20 @@ class Edit extends Component {
               <Left>
                 <Thumbnail source={{uri: uri}}/>
                 <Body>
-                  <Text>{obj.userName}</Text>
+                  <Text style={ styles.baseText }>{obj.userName}</Text>
 
                 </Body>
               </Left>
             </CardItem>
             <CardItem>
               <Body>
-                <Text>StudentId : {obj.stuId}</Text>
-                <Text>FirstName : {obj.firstName}</Text>
-                <Text>LastName : {obj.lastName}</Text>
-                <Text>BLOOD TYPE : {obj.bloodType}</Text>
-                <Text>FACULTY : {obj.faculty}</Text>
-                <Text>Major: {obj.major}</Text>
-                <Text>EmergenzyCell: {obj.emerCell}</Text>
+                <Text style={ styles.baseText }>Student Id :  <Text style={ styles.titleText }>{obj.stuId}</Text></Text>
+                <Text style={ styles.baseText }>First Name :  <Text style={ styles.titleText }>{obj.firstName}</Text></Text>
+                <Text style={ styles.baseText }>Last Name :  <Text style={ styles.titleText }>{obj.lastName}</Text></Text>
+                <Text style={ styles.baseText }>Blood Type :  <Text style={ styles.titleText }>{obj.bloodType}</Text></Text>
+                <Text style={ styles.baseText }>Faculty :  <Text style={ styles.titleText }>{obj.faculty}</Text></Text>
+                <Text style={ styles.baseText }>Major:  <Text style={ styles.titleText }>{obj.major}</Text></Text>
+                <Text style={ styles.baseText }>Emergency Call:  <Text style={ styles.titleText }>{obj.emerCell}</Text></Text>
               </Body>
             </CardItem>
           </Card>
@@ -51,6 +51,15 @@ class Edit extends Component {
       </Container>
     );
   }
+}
+const styles = {
+  baseText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  titleText: {
+    fontWeight: 'normal',
+  },
 }
 export default createContainer(params=>{
   Meteor.subscribe('posts');

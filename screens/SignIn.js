@@ -77,7 +77,7 @@ class SignIn extends Component {
             <Form>
 
               <Item inlineLabel>
-                <Label> Email : </Label>
+                <Label style={{ fontWeight: 'bold', }}> Email : </Label>
                 <Input
                   autoCorrect={false}
                   onChangeText={(email)=>this.setState({email})}
@@ -86,7 +86,7 @@ class SignIn extends Component {
               </Item>
 
                <Item inlineLabel>
-                <Label> Password : </Label>
+                <Label style={{ fontWeight: 'bold', }}> Password : </Label>
                 <Input
                   // style={{}}
                   autoCorrect={false}
@@ -111,14 +111,14 @@ class SignIn extends Component {
               </Button> */}
               <Button
                 primary
-                block 
+                block
                 onPress={() => {this.refs.text1.shake(300);var _this = this;setTimeout(function() { _this.onSignIn(); }, 1000);
 ;}}
                 style={{marginTop: 2}}
               >
-                <Animatable.Text ref = "text1" style={{color: 'white'}}>Signin</Animatable.Text>
+                <Animatable.Text ref = "text1" style={{color: 'white'}}>SignIn</Animatable.Text>
 
-              </Button>           
+              </Button>
               </Animatable.View>
               <Animatable.View style={{marginTop: 10}}
                 ref = "text"

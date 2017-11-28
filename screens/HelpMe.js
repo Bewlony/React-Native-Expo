@@ -69,7 +69,7 @@ class HelpMe extends Component {
         [
           {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
           {text: 'OK', onPress: () =>  {Platform.select({
-                                          android:  () =>  this._handlePressButtonAsync(),
+                                          android:  () => this._handlePressButtonAsync(),
                                           ios:      () => this._handleLinking(),
                                         })()}
           },
@@ -133,16 +133,12 @@ class HelpMe extends Component {
     if(Meteor.userId()){
       {Platform.select({
             android:  () =>  { this._handlePressButtonAsync() },
-
-
             ios:      () =>  { this._handleLinking() },
-
       })()}
     }
     else{
       alert('please login');
       this.props.navigation.navigate('Account');
-
     }
   }
 
