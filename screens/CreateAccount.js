@@ -87,6 +87,7 @@ class CreateAccount extends Component {
         Accounts.createUser({ email, password }, (error) => {
           if (error) {
             this.setState({ error: error.reason });
+            // alert('You must enter an @ in Email');
           } else {
             alert('Create Success');
           }
@@ -111,14 +112,13 @@ class CreateAccount extends Component {
             };
             console.log(info);
             Meteor.call('postInsert',info);
+            this.props.navigation.navigate('User');
           }
         });
-        this.props.navigation.navigate('User');
-        // usersInfo.addUsersInfo(info);
+        // this.props.navigation.navigate('User');
       }
       else{
         console.log('error : '+this.state.error);
-        // alert('Create Account Error');
       }
     }
 
