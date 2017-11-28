@@ -70,15 +70,6 @@ export const LocationsStack = StackNavigator({
   },
 });
 
-export const UploadStack = StackNavigator({
-  Upload: {
-    screen: Upload,
-    navigationOptions: {
-      title: 'Upload',
-    },
-  },
-});
-
 export default TabNavigator(
   {
     Home: {
@@ -90,9 +81,6 @@ export default TabNavigator(
     Locations: {
       screen: LocationsStack,
       swipeEnabled: false,
-    },
-    Upload: {
-      screen: Upload,
     },
   },
   {

@@ -109,6 +109,43 @@ class HelpMe extends Component {
     }
   }
 
+  _handleLinking = async () => {
+    if(Meteor.userId()){
+      Linking.openURL('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+    }else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+    }
+  }
+
+  _handlePressButtonAsync = async () => {
+    if(Meteor.userId()){
+      console.log('https://emergenza.herokuapp.com/upload/'+ Meteor.userId());
+      let result = await WebBrowser.openBrowserAsync('https://emergenza.herokuapp.com/upload/'+ Meteor.userId() );
+      this.setState({ result });
+    }else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+    }
+  }
+
+  onUpload = () =>{
+    if(Meteor.userId()){
+      {Platform.select({
+            android:  () =>  { this._handlePressButtonAsync() },
+
+
+            ios:      () =>  { this._handleLinking() },
+
+      })()}
+    }
+    else{
+      alert('please login');
+      this.props.navigation.navigate('Account');
+
+    }
+  }
+
 
   render() {
     return (
@@ -134,14 +171,9 @@ class HelpMe extends Component {
             onPress={() => this.setState({ active: !this.state.active })}>
             <Icon name="ios-cog" />
             <Button style={{ backgroundColor: '#34A34F' }}
-              onPress={this.onRecord}
+              onPress={this.onUpload}
             >
-              <Icon name="microphone" />
-            </Button>
-            <Button style={{ backgroundColor: '#34A34F' }}
-              onPress={this.onCamera}
-            >
-              <Icon name="camera" />
+              <Icon name="md-cloud-upload" />
             </Button>
           </Fab>
       </Animated.View>
